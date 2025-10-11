@@ -109,8 +109,8 @@ dial_tcp_from_address_and_port :: proc(address: Address, port: int, non_blocking
 
 	Errors that can be returned: `Create_Socket_Error`, or `Dial_Error`
 */
-dial_tcp_from_endpoint :: proc(endpoint: Endpoint, non_blocking := false, options := DEFAULT_TCP_OPTIONS) -> (socket: TCP_Socket, err: Network_Error) {
-	return _dial_tcp_from_endpoint(endpoint, non_blocking, options)
+dial_tcp_from_endpoint :: proc(endpoint: Endpoint, blocking := true, options := DEFAULT_TCP_OPTIONS) -> (socket: TCP_Socket, err: Network_Error) {
+	return _dial_tcp_from_endpoint(endpoint, blocking, options)
 }
 
 dial_tcp :: proc{

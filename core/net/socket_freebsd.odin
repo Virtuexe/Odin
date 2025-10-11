@@ -91,7 +91,7 @@ _create_socket :: proc(family: Address_Family, protocol: Socket_Protocol) -> (so
 }
 
 @(private)
-_dial_tcp_from_endpoint :: proc(endpoint: Endpoint, options := DEFAULT_TCP_OPTIONS) -> (socket: TCP_Socket, err: Network_Error) {
+_dial_tcp_from_endpoint :: proc(endpoint: Endpoint, blocking := true, options := DEFAULT_TCP_OPTIONS) -> (socket: TCP_Socket, err: Network_Error) {
 	if endpoint.port == 0 {
 		return 0, .Port_Required
 	}

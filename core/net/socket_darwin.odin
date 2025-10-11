@@ -78,7 +78,7 @@ _create_socket :: proc(family: Address_Family, protocol: Socket_Protocol) -> (so
 }
 
 @(private)
-_dial_tcp_from_endpoint :: proc(endpoint: Endpoint, options := DEFAULT_TCP_OPTIONS) -> (skt: TCP_Socket, err: Network_Error) {
+_dial_tcp_from_endpoint :: proc(endpoint: Endpoint, blocking := true, options := DEFAULT_TCP_OPTIONS) -> (skt: TCP_Socket, err: Network_Error) {
 	if endpoint.port == 0 {
 		return 0, .Port_Required
 	}
@@ -91,8 +91,8 @@ _dial_tcp_from_endpoint :: proc(endpoint: Endpoint, options := DEFAULT_TCP_OPTIO
 	// bypass the cooldown period, and allow the next run of the program to
 	// use the same address immediately.
 	_ = set_option(skt, .Reuse_Address, true)
-	if non_blocking {
-		_ = set_blocking(socket, true)
+	if !blocking {
+		_ = set_blocking(socket, false)
 	}
 
 	sockaddr := _endpoint_to_sockaddr(endpoint)
