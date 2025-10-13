@@ -130,7 +130,7 @@ _dial_tcp_from_endpoint :: proc(endpoint: Endpoint, blocking := true, options :=
 	// bypass the cooldown period, and allow the next run of the program to
 	// use the same address immediately.
 	_ = set_option(socket, .Reuse_Address, true)
-	if blocking {
+	if !blocking {
 		_ = set_blocking(socket, false)
 	}
 

@@ -100,8 +100,8 @@ _dial_tcp_from_endpoint :: proc(endpoint: Endpoint, blocking := true, options :=
 	new_socket := create_socket(family, .TCP) or_return
 	socket = new_socket.(TCP_Socket)
 
-	if non_blocking {
-		_ = set_blocking(socket, true)
+	if !blocking {
+		_ = set_blocking(socket, false)
 	}
 
 	sockaddr := _endpoint_to_sockaddr(endpoint)
