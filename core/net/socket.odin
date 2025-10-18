@@ -112,7 +112,6 @@ dial_tcp_from_address_and_port :: proc(address: Address, port: int, non_blocking
 dial_tcp_from_endpoint :: proc(endpoint: Endpoint, blocking := true, options := DEFAULT_TCP_OPTIONS) -> (socket: TCP_Socket, err: Network_Error) {
 	return _dial_tcp_from_endpoint(endpoint, blocking, options)
 }
-
 dial_tcp :: proc{
 	dial_tcp_from_endpoint,
 	dial_tcp_from_address_and_port,
